@@ -106,9 +106,10 @@ cp "../conf/config.dist.php" "$final_path/config.php"
 #=================================================
 # MODIFY A CONFIG FILE
 #=================================================
+provider="${domain%%.*}"
 if [ "$etherpad_instance" != "https://annuel2.framapad.org" ]; then
     ynh_replace_string "// CUSTOM_PROVIDER" "" "$final_path/config.php"
-    ynh_replace_string "__PROVIDER__" "default" "$final_path/config.php"
+    ynh_replace_string "__PROVIDER__" "$provider" "$final_path/config.php"
     ynh_replace_string "__INSTANCE__" "$etherpad_instance" "$final_path/config.php"
 else
     ynh_replace_string "__PROVIDER__" "framapad" "$final_path/config.php"
