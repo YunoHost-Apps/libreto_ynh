@@ -1,0 +1,152 @@
+#!/bin/bash
+
+#=================================================
+# GENERIC START
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
+
+source _common.sh
+source /usr/share/yunohost/helpers
+
+#=================================================
+# MANAGE SCRIPT FAILURE
+#=================================================
+
+ynh_clean_setup () {
+	### Remove this function if there's nothing to clean before calling the remove script.
+	true
+}
+# Exit if an error occurs during the execution of the script
+ynh_abort_if_errors
+
+#=================================================
+# RETRIEVE ARGUMENTS FROM THE MANIFEST
+#=================================================
+
+domain=$YNH_APP_ARG_DOMAIN
+path_url="/"
+etherpad_instance=$YNH_APP_ARG_ETHERPAD_INSTANCE
+is_public=$YNH_APP_ARG_IS_PUBLIC
+creation_open=$YNH_APP_ARG_CREATION_OPEN
+
+app=$YNH_APP_INSTANCE_NAME
+
+#=================================================
+# CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
+#=================================================
+
+final_path=/var/www/$app
+test ! -e "$final_path" || ynh_die "This path already contains a folder"
+
+# Normalize the url path syntax
+path_url=$(ynh_normalize_url_path $path_url)
+
+# Check web path availability
+ynh_webpath_available $domain $path_url
+# Register (book) web path
+ynh_webpath_register $app $domain $path_url
+
+#=================================================
+# STORE SETTINGS FROM MANIFEST
+#=================================================
+
+ynh_app_setting_set $app domain $domain
+ynh_app_setting_set $app path $path_url
+ynh_app_setting_set $app etherpad_instance $etherpad_instance
+ynh_app_setting_set $app is_public $is_public
+ynh_app_setting_set $app creation_open $creation_open
+
+#=================================================
+# STANDARD MODIFICATIONS
+#=================================================
+
+
+#=================================================
+# DOWNLOAD, CHECK AND UNPACK SOURCE
+#=================================================
+
+ynh_app_setting_set $app final_path $final_path
+# Note: We use git instead of ynh_setup_source, cause this repo use submodules
+git clone https://github.com/zamentur/libreto.git "$final_path" --quiet
+pushd "$final_path"
+git checkout $COMMIT --quiet
+git submodule update --init --recursive --quiet
+popd
+
+#=================================================
+# NGINX CONFIGURATION
+#=================================================
+
+# Create a dedicated nginx config
+ynh_add_nginx_config
+
+#=================================================
+# CREATE DEDICATED USER
+#=================================================
+
+# Create a system user
+ynh_system_user_create $app
+
+#=================================================
+# PHP-FPM CONFIGURATION
+#=================================================
+
+# Create a dedicated php-fpm config
+ynh_add_fpm_config
+ynh_replace_string "__INSTANCE__" "$etherpad_instance" "/etc/nginx/conf.d/$domain.d/$app.conf"
+
+
+#=================================================
+# SPECIFIC SETUP
+#=================================================
+cp "../conf/config.dist.php" "$final_path/config.php"
+#=================================================
+
+#=================================================
+# MODIFY A CONFIG FILE
+#=================================================
+if [ "$etherpad_instance" != "https://annuel2.framapad.org" ]; then
+    ynh_replace_string "// CUSTOM_PROVIDER" "" "$final_path/config.php"
+    ynh_replace_string "__PROVIDER__" "default" "$final_path/config.php"
+    ynh_replace_string "__INSTANCE__" "$etherpad_instance" "$final_path/config.php"
+else
+    ynh_replace_string "__PROVIDER__" "framapad" "$final_path/config.php"
+fi
+
+#=================================================
+# STORE THE CONFIG FILE CHECKSUM
+#=================================================
+
+# Calculate and store the config file checksum into the app settings
+ynh_store_file_checksum "$final_path/config.php"
+
+#=================================================
+# GENERIC FINALIZATION
+#=================================================
+# SECURE FILES AND DIRECTORIES
+#=================================================
+
+# Set permissions to app files
+chown -R root: $final_path
+
+#=================================================
+# SETUP SSOWAT
+#=================================================
+
+# Make app public if necessary
+if [ $is_public -eq 1 ]
+then
+    if [ $creation_open -eq 1 ]
+    then
+        ynh_app_setting_set $app skipped_uris "/"
+    else
+        ynh_app_setting_set $app skipped_regex "/[^/]+"
+    fi
+fi
+
+#=================================================
+# RELOAD NGINX
+#=================================================
+
+systemctl reload nginx

@@ -1,0 +1,69 @@
+{
+    "name": "Libreto",
+    "id": "libreto",
+    "packaging_format": 1,
+    "description": {
+        "en": "Libreto aggregate your pads to create a wiki.",
+        "fr": "Libreto agrége vos pads pour créer un wiki."
+    },
+    "version": "0.0.20180605~ynh1",
+    "url": "https://libreto.net",
+    "license": "GPL-3.0-or-later",
+    "maintainer": {
+        "name": "ljf",
+        "email": "ljf+libreto_ynh@reflexlibre.net",
+        "url": "https://reflexlibre.net"
+    },
+    "requirements": {
+        "yunohost": ">= 2.7.14"
+    },
+    "multi_instance": true,
+    "services": [
+        "nginx",
+        "php5-fpm"
+    ],
+    "arguments": {
+        "install" : [
+            {
+                "name": "domain",
+                "type": "domain",
+                "ask": {
+                    "en": "Choose a domain name for libreto",
+                    "fr": "Choisissez un nom de domaine pour libreto"
+                },
+                "example": "example.com"
+            },
+            {
+                "name": "etherpad_instance",
+                "ask": {
+                    "en": "Choose etherpad URL Libreto should use?",
+                    "fr": "Choisissez l'url de l'instance etherpad que Libreto utilisera ?"
+                },
+                "help": {
+                    "en": "Libreto need an etherpad instance, you should install before the package etherpad. You need a valid certificate.",
+                    "fr": "Libreto a besoin d'une instance etherpad, vous devriez installer le paquet Libreto avant. Vous devez avoir un certificat valide."
+                },
+                "example": "https://annuel2.framapad.org",
+                "default": "https://annuel2.framapad.org"
+            },
+            {
+                "name": "is_public",
+                "type": "boolean",
+                "ask": {
+                    "en": "Is it a public application?",
+                    "fr": "Est-ce une application publique ?"
+                },
+                "default": true
+            },
+            {
+                "name": "creation_open",
+                "type": "boolean",
+                "ask": {
+                    "en": "Is non member can create a Libreto wiki?",
+                    "fr": "Est-ce qu'une personne sans compte YunoHost peut créer un wiki Libreto ?"
+                },
+                "default": true
+            }
+        ]
+    }
+}
