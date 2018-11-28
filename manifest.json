@@ -43,6 +43,7 @@
                     "en": "Libreto need an etherpad instance, you should install before the package etherpad. You need a valid certificate.",
                     "fr": "Libreto a besoin d'une instance etherpad, vous devriez installer le paquet Libreto avant. Vous devez avoir un certificat valide."
                 },
+                "optional": true,
                 "example": "https://annuel2.framapad.org",
                 "default": "https://annuel2.framapad.org"
             },
