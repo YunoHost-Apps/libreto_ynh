@@ -51,9 +51,9 @@ ynh_webpath_register $app $domain $path_url
 # STORE SETTINGS FROM MANIFEST
 #=================================================
 
-ynh_app_setting_set $app domain $domain
-ynh_app_setting_set $app path $path_url
-ynh_app_setting_set $app etherpad_instance $etherpad_instance
+ynh_app_setting_set $app domain "$domain"
+ynh_app_setting_set $app path "$path_url"
+ynh_app_setting_set $app etherpad_instance "$etherpad_instance"
 ynh_app_setting_set $app is_public $is_public
 ynh_app_setting_set $app creation_open $creation_open
 

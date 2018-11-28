@@ -3,7 +3,7 @@
 		domain="domain.tld"	(DOMAIN)
 		path="/path"	(PATH)
 		admin="john"	(USER)
-		etherpad_instance=""
+		etherpad_instance="https://annuel2.framapad.org"
 		is_public=1	(PUBLIC|public=1|private=0)
 		creation_open=1
 	; Checks
