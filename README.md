@@ -1,8 +1,3 @@
-# Usage of this package (REMOVE THIS SECTION BEFORE RELEASE)
-- Edit `conf/nginx.conf` file to match application prerequisites.
-- Edit `manifest.json` with application specific information.
-- Edit the `install`, `upgrade`, `remove`, `backup`, and `restore` scripts.
-
 # LibreTo for YunoHost
 
 [![Integration level](https://dash.yunohost.org/integration/libreto.svg)](https://ci-apps.yunohost.org/jenkins/job/libreto%20%28Community%29/lastBuild/consoleFull)  
