@@ -1,9 +1,9 @@
 # LibreTo for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/libreto.svg)](https://ci-apps.yunohost.org/jenkins/job/libreto%20%28Community%29/lastBuild/consoleFull)  
-[![Install REPLACEBYYOURAPP with YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=REPLACEBYYOURAPP)
+[![Integration level](https://dash.yunohost.org/integration/libreto.svg)](https://dash.yunohost.org/appci/app/libreto)  
+[![Install LibreTo with YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=libreto)
 
-> *This package allow you to install Libreto quickly and simply on a YunoHost server.  
+> *This package allow you to install LibreTo quickly and simply on a YunoHost server.  
 If you don't have YunoHost, please see [here](https://yunohost.org/#/install) to know how to install and enjoy it.*
 
 ## Overview
@@ -36,8 +36,8 @@ Libreto has no user management, but YunoHost allow you to decide if this app is 
 
 #### Supported architectures
 
-* x86-64b - [!Build Status](https://ci-apps.yunohost.org/ci/apps/libreto)
-* ARMv8-A - [!Build Status](https://ci-apps-arm.yunohost.org/ci/apps/libreto)
+* x86-64b - [![Build Status](https://ci-apps.yunohost.org/ci/logs/libreto%20%28Apps%29.svg)](https://ci-apps.yunohost.org/ci/apps/libreto/)
+* ARMv8-A - [![Build Status](https://ci-apps-arm.yunohost.org/ci/logs/libreto%20%28Apps%29.svg)](https://ci-apps-arm.yunohost.org/ci/apps/libreto/)
 
 ## Limitations
 
