@@ -6,7 +6,7 @@
         "en": "Libreto aggregate your pads to create a wiki.",
         "fr": "Libreto agrége vos pads pour créer un wiki."
     },
-    "version": "0.0.20180605~ynh1",
+    "version": "0.0.20180605~ynh2",
     "url": "https://libreto.net",
     "license": "GPL-3.0-or-later",
     "maintainer": {
