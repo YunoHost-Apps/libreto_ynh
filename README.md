@@ -1,13 +1,13 @@
-# LibreTo for YunoHost
+# Libreto for YunoHost
 
 [![Integration level](https://dash.yunohost.org/integration/libreto.svg)](https://dash.yunohost.org/appci/app/libreto) ![](https://ci-apps.yunohost.org/ci/badges/libreto.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/libreto.maintain.svg)  
-[![Install LibreTo with YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=libreto)
+[![Install Libreto with YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=libreto)
 
-> *This package allow you to install LibreTo quickly and simply on a YunoHost server.  
+> *This package allow you to install Libreto quickly and simply on a YunoHost server.  
 If you don't have YunoHost, please see [here](https://yunohost.org/#/install) to know how to install and enjoy it.*
 
 ## Overview
-Libreto let you aggregate your pad (etherpad lite) to create a kind of wiki easily.
+Libreto let you aggregate your pad (Etherpad lite) to create a kind of wiki easily.
 
 **Shipped version:** 0.0.20180605
 
