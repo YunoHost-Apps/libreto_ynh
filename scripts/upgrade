@@ -23,11 +23,6 @@ etherpad_instance=$(ynh_app_setting_get $app etherpad_instance)
 creation_open=$(ynh_app_setting_get $app creation_open)
 
 #=================================================
-# ENSURE DOWNWARD COMPATIBILITY
-#=================================================
-
-
-#=================================================
 # BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
 #=================================================
 
@@ -41,51 +36,45 @@ ynh_clean_setup () {
 ynh_abort_if_errors
 
 #=================================================
-# CHECK THE PATH
-#=================================================
-
-# Normalize the URL path syntax
-path_url=$(ynh_normalize_url_path $path_url)
-
-#=================================================
 # STANDARD UPGRADE STEPS
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
+ynh_script_progression --message="Upgrading source files..." --weight=5
 
 # Download, check integrity, uncompress and patch the source from app.src
 pushd "$final_path"
-git checkout master
-git pull --quiet
-git checkout $COMMIT --quiet
-git submodule update --init --recursive --quiet
+	git checkout master
+	git pull --quiet
+	git checkout $COMMIT --quiet
+	git submodule update --init --recursive --quiet
 popd
 
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
+ynh_script_progression --message="Upgrading NGINX web server configuration..." --weight=2
 
-# Create a dedicated nginx config
+# Create a dedicated NGINX config
 ynh_add_nginx_config
 
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
+ynh_script_progression --message="Making sure dedicated system user exists..." --weight=1
 
 # Create a dedicated user (if not existing)
-ynh_system_user_create $app
+ynh_system_user_create --username=$app
 
 #=================================================
 # PHP-FPM CONFIGURATION
 #=================================================
-
+ynh_script_progression --message="Upgrading PHP-FPM configuration..." --weight=2
 # Create a dedicated php-fpm config
 ynh_add_fpm_config
 
 #=================================================
 # SPECIFIC UPGRADE
-#=================================================
-# ...
 #=================================================
 
 ### Verify the checksum of a file, stored by `ynh_store_file_checksum` in the install script.
@@ -93,7 +82,6 @@ ynh_add_fpm_config
 ynh_backup_if_checksum_is_different "$final_path/config.php"
 # Recalculate and store the checksum of the file for the next upgrade.
 ynh_store_file_checksum "$final_path/config.php"
-
 
 #=================================================
 # GENERIC FINALIZATION
@@ -107,6 +95,7 @@ chown -R root: $final_path
 #=================================================
 # SETUP SSOWAT
 #=================================================
+ynh_script_progression --message="Upgrading SSOwat configuration..." --weight=1
 
 # Make app public if necessary
 if [ $is_public -eq 1 ]
@@ -122,5 +111,13 @@ fi
 #=================================================
 # RELOAD NGINX
 #=================================================
+ynh_script_progression --message="Reloading NGINX web server..." --weight=1
 
-systemctl reload nginx
+ynh_systemd_action --service_name=nginx --action=reload
+
+#=================================================
+# END OF SCRIPT
+#=================================================
+
+ynh_script_progression --message="Upgrade of $app completed" --last
+

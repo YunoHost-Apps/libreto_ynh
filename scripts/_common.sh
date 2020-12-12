@@ -1,14 +1,23 @@
 #!/bin/bash
-COMMIT="76408f5e98a68156afa47996e670d110a1c6106d"
 
-# ============= FUTURE YUNOHOST HELPER =============
-# Delete a file checksum from the app settings
-#
-# $app should be defined when calling this helper
-#
-# usage: ynh_remove_file_checksum file
-# | arg: file - The file for which the checksum will be deleted
-ynh_delete_file_checksum () {
-	local checksum_setting_name=checksum_${1//[\/ ]/_}	# Replace all '/' and ' ' by '_'
-	ynh_app_setting_delete $app $checksum_setting_name
-}
+#=================================================
+# COMMON VARIABLES
+#=================================================
+
+YNH_PHP_VERSION="7.3"
+
+#COMMIT="76408f5e98a68156afa47996e670d110a1c6106d"
+
+COMMIT="da3f312fec0a829cc3df1191113e93b49fb4786e"
+
+#=================================================
+# PERSONAL HELPERS
+#=================================================
+
+#=================================================
+# EXPERIMENTAL HELPERS
+#=================================================
+
+#=================================================
+# FUTURE OFFICIAL HELPERS
+#=================================================

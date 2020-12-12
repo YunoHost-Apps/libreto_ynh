@@ -3,8 +3,8 @@
     "id": "libreto",
     "packaging_format": 1,
     "description": {
-        "en": "Libreto aggregate your pads to create a wiki.",
-        "fr": "Libreto agrége vos pads pour créer un wiki."
+        "en": "Aggregate your pads to create a wiki.",
+        "fr": "Agréger vos pads pour créer un wiki."
     },
     "version": "0.0.20180605~ynh2",
     "url": "https://libreto.net",
@@ -28,8 +28,8 @@
                 "name": "domain",
                 "type": "domain",
                 "ask": {
-                    "en": "Choose a domain name for libreto",
-                    "fr": "Choisissez un nom de domaine pour libreto"
+                    "en": "Choose a domain name for Libreto",
+                    "fr": "Choisissez un nom de domaine pour Libreto"
                 },
                 "example": "example.com"
             },
@@ -37,11 +37,11 @@
                 "name": "etherpad_instance",
                 "ask": {
                     "en": "Choose etherpad URL Libreto should use?",
-                    "fr": "Choisissez l'url de l'instance etherpad que Libreto utilisera ?"
+                    "fr": "Choisissez l'URL de l'instance etherpad que Libreto utilisera ?"
                 },
                 "help": {
-                    "en": "Libreto need an etherpad instance, you should install before the package etherpad. You need a valid certificate.",
-                    "fr": "Libreto a besoin d'une instance etherpad, vous devriez installer le paquet Libreto avant. Vous devez avoir un certificat valide."
+                    "en": "Libreto need an Etherpad instance, you should install before the package etherpad. You need a valid certificate.",
+                    "fr": "Libreto a besoin d'une instance Etherpad, vous devriez installer le paquet Libreto avant. Vous devez avoir un certificat valide."
                 },
                 "optional": true,
                 "example": "https://annuel2.framapad.org",
