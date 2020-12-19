@@ -1,7 +1,7 @@
 # Libreto for YunoHost
 
 [![Integration level](https://dash.yunohost.org/integration/libreto.svg)](https://dash.yunohost.org/appci/app/libreto) ![](https://ci-apps.yunohost.org/ci/badges/libreto.status.svg) ![](https://ci-apps.yunohost.org/ci/badges/libreto.maintain.svg)  
-[![Install Libreto with YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=libreto)
+[![Install Libreto with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=libreto)
 
 > *This package allow you to install Libreto quickly and simply on a YunoHost server.  
 If you don't have YunoHost, please see [here](https://yunohost.org/#/install) to know how to install and enjoy it.*
