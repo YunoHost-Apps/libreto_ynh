@@ -35,48 +35,44 @@ app=$YNH_APP_INSTANCE_NAME
 #=================================================
 # CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
 #=================================================
+ynh_script_progression --message="Validating installation parameters..." --weight=1
 
 final_path=/var/www/$app
 test ! -e "$final_path" || ynh_die "This path already contains a folder"
 
-# Normalize the url path syntax
-path_url=$(ynh_normalize_url_path $path_url)
-
-# Check web path availability
-ynh_webpath_available $domain $path_url
 # Register (book) web path
-ynh_webpath_register $app $domain $path_url
+ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
 
 #=================================================
 # STORE SETTINGS FROM MANIFEST
 #=================================================
 
-ynh_app_setting_set $app domain "$domain"
-ynh_app_setting_set $app path "$path_url"
-ynh_app_setting_set $app etherpad_instance "$etherpad_instance"
-ynh_app_setting_set $app is_public $is_public
-ynh_app_setting_set $app creation_open $creation_open
+ynh_app_setting_set --app=$app --key=domain --value=$domain
+ynh_app_setting_set --app=$app --key=path --value=$path_url
+ynh_app_setting_set --app=$app --key=etherpad_instance --value=$etherpad_instance
+ynh_app_setting_set --app=$app --key=is_public --value=$is_public
+ynh_app_setting_set --app=$app --key=creation_open --value=$creation_open
 
 #=================================================
 # STANDARD MODIFICATIONS
 #=================================================
-
-
-#=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
+ynh_script_progression --message="Setting up source files..." --weight=4
 
-ynh_app_setting_set $app final_path $final_path
+ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 # Note: We use git instead of ynh_setup_source, cause this repo use submodules
 git clone https://github.com/zamentur/libreto.git "$final_path" --quiet
+
 pushd "$final_path"
-git checkout $COMMIT --quiet
-git submodule update --init --recursive --quiet
+    git checkout $COMMIT --quiet
+    git submodule update --init --recursive --quiet
 popd
 
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
+ynh_script_progression --message="Configuring NGINX web server..." --weight=2
 
 # Create a dedicated nginx config
 ynh_add_nginx_config
@@ -84,35 +80,35 @@ ynh_add_nginx_config
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
+ynh_script_progression --message="Configuring system user..." --weight=1
 
 # Create a system user
-ynh_system_user_create $app
+ynh_system_user_create --username=$app
 
 #=================================================
 # PHP-FPM CONFIGURATION
 #=================================================
+ynh_script_progression --message="Configuring PHP-FPM..." --weight=2
 
-# Create a dedicated php-fpm config
+# Create a dedicated PHP-FPM config
 ynh_add_fpm_config
-ynh_replace_string "__INSTANCE__" "$etherpad_instance" "/etc/nginx/conf.d/$domain.d/$app.conf"
+phpversion=$(ynh_app_setting_get --app=$app --key=phpversion)
 
-
-#=================================================
-# SPECIFIC SETUP
-#=================================================
-cp "../conf/config.dist.php" "$final_path/config.php"
-#=================================================
+ynh_replace_string --match_string="__INSTANCE__" --replace_string="$etherpad_instance" --target_file="/etc/nginx/conf.d/$domain.d/$app.conf"
 
 #=================================================
 # MODIFY A CONFIG FILE
 #=================================================
+
+cp "../conf/config.dist.php" "$final_path/config.php"
+
 provider="${domain%%.*}"
 if [ "$etherpad_instance" != "https://annuel2.framapad.org" ]; then
-    ynh_replace_string "// CUSTOM_PROVIDER" "" "$final_path/config.php"
-    ynh_replace_string "__PROVIDER__" "$provider" "$final_path/config.php"
-    ynh_replace_string "__INSTANCE__" "$etherpad_instance" "$final_path/config.php"
+    ynh_replace_string --match_string="// CUSTOM_PROVIDER" --replace_string="" --target_file="$final_path/config.php"
+    ynh_replace_string --match_string="__PROVIDER__" --replace_string="$provider" --target_file="$final_path/config.php"
+    ynh_replace_string --match_string="__INSTANCE__" --replace_string="$etherpad_instance" --target_file="$final_path/config.php"
 else
-    ynh_replace_string "__PROVIDER__" "framapad" "$final_path/config.php"
+    ynh_replace_string --match_string="__PROVIDER__" --replace_string="framapad" --target_file="$final_path/config.php"
 fi
 
 #=================================================
@@ -134,6 +130,7 @@ chown -R root: $final_path
 #=================================================
 # SETUP SSOWAT
 #=================================================
+ynh_script_progression --message="Configuring SSOwat..." --weight=1
 
 # Make app public if necessary
 if [ $is_public -eq 1 ]
@@ -149,5 +146,12 @@ fi
 #=================================================
 # RELOAD NGINX
 #=================================================
+ynh_script_progression --message="Reloading NGINX web server..." --weight=1
 
-systemctl reload nginx
+ynh_systemd_action --service_name=nginx --action=reload
+
+#=================================================
+# END OF SCRIPT
+#=================================================
+
+ynh_script_progression --message="Installation of $app completed" --last
