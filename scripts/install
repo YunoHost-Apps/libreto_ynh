@@ -50,7 +50,6 @@ ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
 ynh_app_setting_set --app=$app --key=domain --value=$domain
 ynh_app_setting_set --app=$app --key=path --value=$path_url
 ynh_app_setting_set --app=$app --key=etherpad_instance --value=$etherpad_instance
-ynh_app_setting_set --app=$app --key=is_public --value=$is_public
 ynh_app_setting_set --app=$app --key=creation_open --value=$creation_open
 
 #=================================================
@@ -132,15 +131,13 @@ chown -R root: $final_path
 #=================================================
 ynh_script_progression --message="Configuring SSOwat..." --weight=1
 
+
+
 # Make app public if necessary
-if [ $is_public -eq 1 ]
+if [ "$is_public" -eq 1 ]
 then
-    if [ $creation_open -eq 1 ]
-    then
-        ynh_app_setting_set $app skipped_uris "/"
-    else
-        ynh_app_setting_set $app skipped_regex "/[^/]+"
-    fi
+	ynh_permission_update --permission="main" --add="visitors"
+fi
 fi
 
 #=================================================
