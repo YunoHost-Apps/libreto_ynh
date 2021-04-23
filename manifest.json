@@ -15,22 +15,18 @@
         "url": "https://reflexlibre.net"
     },
     "requirements": {
-        "yunohost": ">= 3.8.5"
+        "yunohost": ">= 4.1.7"
     },
     "multi_instance": true,
     "services": [
         "nginx",
-        "php7.0-fpm"
+        "php7.3-fpm"
     ],
     "arguments": {
         "install" : [
             {
                 "name": "domain",
                 "type": "domain",
-                "ask": {
-                    "en": "Choose a domain name for Libreto",
-                    "fr": "Choisissez un nom de domaine pour Libreto"
-                },
                 "example": "example.com"
             },
             {
@@ -51,10 +47,6 @@
             {
                 "name": "is_public",
                 "type": "boolean",
-                "ask": {
-                    "en": "Is it a public application?",
-                    "fr": "Est-ce une application publique ?"
-                },
                 "help": {
                     "en": "If enabled, Libreto will be accessible by people who do not have an account. This can be changed later via the webadmin.",
                     "fr": "Si cette case est cochée, Libreto sera accessible aux personnes n’ayant pas de compte. Vous pourrez changer ceci plus tard via la webadmin."
