@@ -17,7 +17,6 @@ app=$YNH_APP_INSTANCE_NAME
 
 domain=$(ynh_app_setting_get --app=$app --key=domain)
 path_url=$(ynh_app_setting_get --app=$app --key=path)
-is_public=$(ynh_app_setting_get --app=$app --key=is_public)
 final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 etherpad_instance=$(ynh_app_setting_get --app=$app --key=etherpad_instance)
 creation_open=$(ynh_app_setting_get --app=$app --key=creation_open)
@@ -40,6 +39,18 @@ ynh_clean_setup () {
 }
 # Exit if an error occurs during the execution of the script
 ynh_abort_if_errors
+
+#=================================================
+# ENSURE DOWNWARD COMPATIBILITY
+#=================================================
+ynh_script_progression --message="Ensuring downward compatibility..." --weight=1
+
+# Cleaning legacy permissions
+if ynh_legacy_permissions_exists; then
+	ynh_legacy_permissions_delete_all
+
+	ynh_app_setting_delete --app=$app --key=is_public
+fi
 
 #=================================================
 # CREATE DEDICATED USER
@@ -94,22 +105,6 @@ ynh_add_fpm_config
 ynh_backup_if_checksum_is_different "$final_path/config.php"
 # Recalculate and store the checksum of the file for the next upgrade.
 ynh_store_file_checksum "$final_path/config.php"
-
-#=================================================
-# SETUP SSOWAT
-#=================================================
-ynh_script_progression --message="Upgrading SSOwat configuration..." --weight=1
-
-# Make app public if necessary
-if [ $is_public -eq 1 ]
-then
-    if [ $creation_open -eq 1 ]
-    then
-        ynh_app_setting_set $app skipped_uris "/"
-    else
-        ynh_app_setting_set $app skipped_regex "/[^/]+"
-    fi
-fi
 
 #=================================================
 # RELOAD NGINX
