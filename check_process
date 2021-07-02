@@ -12,9 +12,14 @@
 		setup_private=1
 		setup_public=1
 		upgrade=1
+		upgrade=1	from_commit=f6fcb8686cec30da2a7b9e5ba12d6c5b295528d8
 		backup_restore=1
 		multi_instance=1
 		change_url=1
 ;;; Options
 Email=ljf+libreto_ynh@reflexlibre.net
 Notification=down
+;;; Upgrade options
+	; commit=f6fcb8686cec30da2a7b9e5ba12d6c5b295528d8
+		name=Merge pull request #7 from YunoHost-Apps/testing
+		manifest_arg=domain=DOMAIN&path=PATH&admin=USER&language=fr&is_public=1&password=pass&port=666&
