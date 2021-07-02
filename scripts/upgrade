@@ -15,12 +15,12 @@ source /usr/share/yunohost/helpers
 
 app=$YNH_APP_INSTANCE_NAME
 
-domain=$(ynh_app_setting_get $app domain)
-path_url=$(ynh_app_setting_get $app path)
-is_public=$(ynh_app_setting_get $app is_public)
-final_path=$(ynh_app_setting_get $app final_path)
-etherpad_instance=$(ynh_app_setting_get $app etherpad_instance)
-creation_open=$(ynh_app_setting_get $app creation_open)
+domain=$(ynh_app_setting_get --app=$app --key=domain)
+path_url=$(ynh_app_setting_get --app=$app --key=path)
+is_public=$(ynh_app_setting_get --app=$app --key=is_public)
+final_path=$(ynh_app_setting_get --app=$app --key=final_path)
+etherpad_instance=$(ynh_app_setting_get --app=$app --key=etherpad_instance)
+creation_open=$(ynh_app_setting_get --app=$app --key=creation_open)
 
 #=================================================
 # BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
