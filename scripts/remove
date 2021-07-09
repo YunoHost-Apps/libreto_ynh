@@ -16,8 +16,8 @@ ynh_script_progression --message="Loading installation settings..." --weight=1
 
 app=$YNH_APP_INSTANCE_NAME
 
-domain=$(ynh_app_setting_get $app domain)
-final_path=$(ynh_app_setting_get $app final_path)
+domain=$(ynh_app_setting_get --app=$app --key=domain)
+final_path=$(ynh_app_setting_get --app=$app --key=final_path)
 
 #=================================================
 # STANDARD REMOVE
@@ -44,14 +44,6 @@ ynh_script_progression --message="Removing PHP-FPM configuration..." --weight=1
 
 # Remove the dedicated PHP-FPM config
 ynh_remove_fpm_config
-
-#=================================================
-# REMOVE LOGROTATE CONFIGURATION
-#=================================================
-ynh_script_progression --message="Removing logrotate configuration..." --weight=1
-
-# Remove the app-specific logrotate config
-ynh_remove_logrotate
 
 #=================================================
 # GENERIC FINALIZATION

@@ -28,13 +28,6 @@ $providers = array(
     'markdown'                   => false,
     'html'                       => true,
   ),
-  'factor'  => array(
-    'name'                       => "Factor",
-    'url'                        => "https://factor.cc/pad",
-    'default_text'               => "Welcome to factor.cc Pad!",
-    'markdown'                   => false,
-    'html'                       => true,
-  ),
   'etherpad'  => array(
     'name'                       => "Etherpad.net",
     'url'                        => "https://etherpad.net",

@@ -8,6 +8,13 @@
     },
     "version": "0.0.20180605~ynh2",
     "url": "https://libreto.net",
+    "upstream": {
+        "license": "GPL-3.0-or-later",
+        "website": "https://libreto.net",
+        "demo": "https://libreto.net",
+        "admindoc": "https://github.com/Ventricule/libreto",
+        "code": "https://github.com/Ventricule/libreto"
+    },
     "license": "GPL-3.0-or-later",
     "maintainer": {
         "name": "ljf",
@@ -15,7 +22,7 @@
         "url": "https://reflexlibre.net"
     },
     "requirements": {
-        "yunohost": ">= 4.1.7"
+        "yunohost": ">= 4.2.0"
     },
     "multi_instance": true,
     "services": [
