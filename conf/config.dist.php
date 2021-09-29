@@ -54,7 +54,9 @@ $providers = array(
 // CUSTOM_PROVIDER);
 
 $options = array(
-  'name'                            => "Libreto",
+  'name'                            => "Libreto",  
+  'root'                            => '__PATH__',
+  'use_subdomain'                   => false,
   'default_provider'                => "__PROVIDER__",
   'providers'                       => $providers,
 );
