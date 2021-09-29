@@ -37,6 +37,12 @@
                 "example": "example.com"
             },
             {
+                "name": "path",
+                "type": "path",
+                "example": "/libreto",
+                "default": "/libreto"
+            },
+            {
                 "name": "etherpad_instance",
                 "type": "string",
                 "ask": {
