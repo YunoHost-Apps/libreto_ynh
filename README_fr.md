@@ -11,7 +11,8 @@ Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour
 
 ## Vue d'ensemble
 
-Agrégez vos pads pour créer un wiki
+Libreto est un carnet de note collaboratif fondé sur etherpad. Il peut devenir un mini-site, le carnet de bord d'un workshop ou le support de rédaction d'un livre collectif.
+
 
 **Version incluse :** 0.0.20180605~ynh3
 
