@@ -11,9 +11,9 @@ Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour
 
 ## Vue d'ensemble
 
-Agrégez vos pads pour créer un wiki.
+Agrégez vos pads pour créer un wiki
 
-**Version incluse :** 0.0.20180605~ynh2
+**Version incluse :** 0.0.20180605~ynh3
 
 **Démo :** https://libreto.net
 
@@ -25,7 +25,6 @@ Agrégez vos pads pour créer un wiki.
 ## Documentations et ressources
 
 * Site officiel de l'app : https://libreto.net
-* Documentation officielle de l'admin : https://github.com/Ventricule/libreto
 * Dépôt de code officiel de l'app : https://github.com/Ventricule/libreto
 * Documentation YunoHost pour cette app : https://yunohost.org/app_libreto
 * Signaler un bug : https://github.com/YunoHost-Apps/libreto_ynh/issues
