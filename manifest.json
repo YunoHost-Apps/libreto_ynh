@@ -3,11 +3,17 @@
     "id": "libreto",
     "packaging_format": 1,
     "description": {
-        "en": "Aggregate your pads to create a wiki.",
-        "fr": "Agrégez vos pads pour créer un wiki."
+        "en": "Aggregate your pads to create a wiki",
+        "fr": "Agrégez vos pads pour créer un wiki"
     },
-    "version": "0.0.20180605~ynh2",
+    "version": "0.0.20180605~ynh3",
     "url": "https://libreto.net",
+    "upstream": {
+        "license": "GPL-3.0-or-later",
+        "website": "https://libreto.net",
+        "demo": "https://libreto.net",
+        "code": "https://github.com/Ventricule/libreto"
+    },
     "license": "GPL-3.0-or-later",
     "maintainer": {
         "name": "ljf",
@@ -15,23 +21,24 @@
         "url": "https://reflexlibre.net"
     },
     "requirements": {
-        "yunohost": ">= 3.8.5"
+        "yunohost": ">= 4.3.0"
     },
     "multi_instance": true,
     "services": [
         "nginx",
-        "php7.0-fpm"
+        "php7.3-fpm"
     ],
     "arguments": {
         "install" : [
             {
                 "name": "domain",
-                "type": "domain",
-                "ask": {
-                    "en": "Choose a domain name for Libreto",
-                    "fr": "Choisissez un nom de domaine pour Libreto"
-                },
-                "example": "example.com"
+                "type": "domain"
+            },
+            {
+                "name": "path",
+                "type": "path",
+                "example": "/libreto",
+                "default": "/libreto"
             },
             {
                 "name": "etherpad_instance",
@@ -51,10 +58,6 @@
             {
                 "name": "is_public",
                 "type": "boolean",
-                "ask": {
-                    "en": "Is it a public application?",
-                    "fr": "Est-ce une application publique ?"
-                },
                 "help": {
                     "en": "If enabled, Libreto will be accessible by people who do not have an account. This can be changed later via the webadmin.",
                     "fr": "Si cette case est cochée, Libreto sera accessible aux personnes n’ayant pas de compte. Vous pourrez changer ceci plus tard via la webadmin."

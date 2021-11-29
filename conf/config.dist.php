@@ -28,13 +28,6 @@ $providers = array(
     'markdown'                   => false,
     'html'                       => true,
   ),
-  'factor'  => array(
-    'name'                       => "Factor",
-    'url'                        => "https://factor.cc/pad",
-    'default_text'               => "Welcome to factor.cc Pad!",
-    'markdown'                   => false,
-    'html'                       => true,
-  ),
   'etherpad'  => array(
     'name'                       => "Etherpad.net",
     'url'                        => "https://etherpad.net",
@@ -61,7 +54,9 @@ $providers = array(
 // CUSTOM_PROVIDER);
 
 $options = array(
-  'name'                            => "Libreto",
+  'name'                            => "Libreto",  
+  'root'                            => '__PATH__',
+  'use_subdomain'                   => false,
   'default_provider'                => "__PROVIDER__",
   'providers'                       => $providers,
 );
