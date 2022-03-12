@@ -25,7 +25,7 @@ ynh_abort_if_errors
 #=================================================
 
 domain=$YNH_APP_ARG_DOMAIN
-path_url=$YNH_APP_ARG_PATH
+path_url="/"
 etherpad_instance=$YNH_APP_ARG_ETHERPAD_INSTANCE
 is_public=$YNH_APP_ARG_IS_PUBLIC
 creation_open=$YNH_APP_ARG_CREATION_OPEN
