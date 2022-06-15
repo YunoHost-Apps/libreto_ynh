@@ -29,7 +29,7 @@
         "php7.3-fpm"
     ],
     "arguments": {
-        "install" : [
+        "install": [
             {
                 "name": "domain",
                 "type": "domain"
@@ -39,6 +39,15 @@
                 "type": "path",
                 "example": "/libreto",
                 "default": "/libreto"
+            },
+            {
+                "name": "is_public",
+                "type": "boolean",
+                "help": {
+                    "en": "If enabled, Libreto will be accessible by people who do not have an account. This can be changed later via the webadmin.",
+                    "fr": "Si cette case est cochée, Libreto sera accessible aux personnes n’ayant pas de compte. Vous pourrez changer ceci plus tard via la webadmin."
+                },
+                "default": true
             },
             {
                 "name": "etherpad_instance",
@@ -54,15 +63,6 @@
                 "optional": true,
                 "example": "https://annuel2.framapad.org",
                 "default": "https://annuel2.framapad.org"
-            },
-            {
-                "name": "is_public",
-                "type": "boolean",
-                "help": {
-                    "en": "If enabled, Libreto will be accessible by people who do not have an account. This can be changed later via the webadmin.",
-                    "fr": "Si cette case est cochée, Libreto sera accessible aux personnes n’ayant pas de compte. Vous pourrez changer ceci plus tard via la webadmin."
-                },
-                "default": true
             },
             {
                 "name": "creation_open",

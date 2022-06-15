@@ -1,8 +1,8 @@
 ;; Test complet
 	; Manifest
 		domain="domain.tld"
-		etherpad_instance="https://annuel2.framapad.org"
 		is_public=1
+		etherpad_instance="https://annuel2.framapad.org"
 		creation_open=1
 	; Checks
 		pkg_linter=1
@@ -12,9 +12,13 @@
 		setup_private=1
 		setup_public=1
 		upgrade=1
+		# 0.0.20180605~ynh2
 		upgrade=1	from_commit=f6fcb8686cec30da2a7b9e5ba12d6c5b295528d8
+		# 0.0.20180605~ynh3
+		upgrade=1	from_commit=ce19369d877b54a9b562444ade220d8d55639edb
 		backup_restore=1
 		multi_instance=1
+		port_already_use=0
 		change_url=1
 ;;; Options
 Email=ljf+libreto_ynh@reflexlibre.net
