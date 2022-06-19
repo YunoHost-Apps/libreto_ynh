@@ -14,7 +14,6 @@ source /usr/share/yunohost/helpers
 #=================================================
 
 ynh_clean_setup () {
-	### Remove this function if there's nothing to clean before calling the remove script.
 	true
 }
 # Exit if an error occurs during the execution of the script
@@ -26,8 +25,8 @@ ynh_abort_if_errors
 
 domain=$YNH_APP_ARG_DOMAIN
 path_url=$YNH_APP_ARG_PATH
-etherpad_instance=$YNH_APP_ARG_ETHERPAD_INSTANCE
 is_public=$YNH_APP_ARG_IS_PUBLIC
+etherpad_instance=$YNH_APP_ARG_ETHERPAD_INSTANCE
 creation_open=$YNH_APP_ARG_CREATION_OPEN
 
 app=$YNH_APP_INSTANCE_NAME
@@ -38,7 +37,7 @@ app=$YNH_APP_INSTANCE_NAME
 ynh_script_progression --message="Validating installation parameters..." --weight=1
 
 final_path=/var/www/$app
-test ! -e "$final_path" || ynh_die "This path already contains a folder"
+test ! -e "$final_path" || ynh_die --message="This path already contains a folder"
 
 # Register (book) web path
 ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
@@ -46,12 +45,15 @@ ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
 #=================================================
 # STORE SETTINGS FROM MANIFEST
 #=================================================
+ynh_script_progression --message="Storing installation settings..."
 
 ynh_app_setting_set --app=$app --key=domain --value=$domain
 ynh_app_setting_set --app=$app --key=path --value=$path_url
 ynh_app_setting_set --app=$app --key=etherpad_instance --value=$etherpad_instance
 ynh_app_setting_set --app=$app --key=creation_open --value=$creation_open
 
+#=================================================
+# STANDARD MODIFICATIONS
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
@@ -60,8 +62,6 @@ ynh_script_progression --message="Configuring system user..." --weight=1
 # Create a system user
 ynh_system_user_create --username=$app --home_dir="$final_path"
 
-#=================================================
-# STANDARD MODIFICATIONS
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
@@ -81,14 +81,6 @@ chmod -R o-rwx "$final_path"
 chown -R $app:www-data "$final_path"
 
 #=================================================
-# NGINX CONFIGURATION
-#=================================================
-ynh_script_progression --message="Configuring NGINX web server..." --weight=2
-
-# Create a dedicated nginx config
-ynh_add_nginx_config
-
-#=================================================
 # PHP-FPM CONFIGURATION
 #=================================================
 ynh_script_progression --message="Configuring PHP-FPM..." --weight=2
@@ -97,11 +89,21 @@ ynh_script_progression --message="Configuring PHP-FPM..." --weight=2
 ynh_add_fpm_config
 phpversion=$(ynh_app_setting_get --app=$app --key=phpversion)
 
+#=================================================
+# NGINX CONFIGURATION
+#=================================================
+ynh_script_progression --message="Configuring NGINX web server..." --weight=2
+
+# Create a dedicated NGINX config
+ynh_add_nginx_config
 ynh_replace_string --match_string="__INSTANCE__" --replace_string="$etherpad_instance" --target_file="/etc/nginx/conf.d/$domain.d/$app.conf"
 
 #=================================================
-# MODIFY A CONFIG FILE
+# SPECIFIC SETUP
 #=================================================
+# ADD A CONFIGURATION
+#=================================================
+ynh_script_progression --message="Adding a configuration file..."
 
 cp "../conf/config.dist.php" "$final_path/config.php"
 
@@ -114,13 +116,11 @@ else
     ynh_replace_string --match_string="__PROVIDER__" --replace_string="framapad" --target_file="$final_path/config.php"
 fi
 
-#=================================================
-# STORE THE CONFIG FILE CHECKSUM
-#=================================================
-
 # Calculate and store the config file checksum into the app settings
 ynh_store_file_checksum "$final_path/config.php"
 
+#=================================================
+# GENERIC FINALIZATION
 #=================================================
 # SETUP SSOWAT
 #=================================================
@@ -129,7 +129,9 @@ ynh_script_progression --message="Configuring permissions..." --weight=1
 # Make app public if necessary
 if [ $is_public -eq 1 ]
 then
-    ynh_permission_update --permission="main" --add="visitors"
+	# Everyone can access the app.
+	# The "main" permission is automatically created before the install script.
+	ynh_permission_update --permission="main" --add="visitors"
 fi
 
 #=================================================
