@@ -75,6 +75,8 @@ if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
 	ynh_script_progression --message="Upgrading source files..." --weight=5
 
+	git config --system --add safe.directory $final_path
+
 	# Download, check integrity, uncompress and patch the source from app.src
 	pushd "$final_path"
 		git checkout master
