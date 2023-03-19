@@ -13,42 +13,42 @@ source /usr/share/yunohost/helpers
 # MANAGE SCRIPT FAILURE
 #=================================================
 
-ynh_clean_setup () {
+#REMOVEME? ynh_clean_setup () {
 	true
 }
 # Exit if an error occurs during the execution of the script
-ynh_abort_if_errors
+#REMOVEME? ynh_abort_if_errors
 
 #=================================================
 # RETRIEVE ARGUMENTS FROM THE MANIFEST
 #=================================================
 
-domain=$YNH_APP_ARG_DOMAIN
-path_url=$YNH_APP_ARG_PATH
-is_public=$YNH_APP_ARG_IS_PUBLIC
-etherpad_instance=$YNH_APP_ARG_ETHERPAD_INSTANCE
-creation_open=$YNH_APP_ARG_CREATION_OPEN
+#REMOVEME? domain=$YNH_APP_ARG_DOMAIN
+#REMOVEME? path=$YNH_APP_ARG_PATH
+#REMOVEME? is_public=$YNH_APP_ARG_IS_PUBLIC
+#REMOVEME? etherpad_instance=$YNH_APP_ARG_ETHERPAD_INSTANCE
+#REMOVEME? creation_open=$YNH_APP_ARG_CREATION_OPEN
 
-app=$YNH_APP_INSTANCE_NAME
+#REMOVEME? app=$YNH_APP_INSTANCE_NAME
 
 #=================================================
 # CHECK IF THE APP CAN BE INSTALLED WITH THESE ARGS
 #=================================================
-ynh_script_progression --message="Validating installation parameters..." --weight=1
+#REMOVEME? ynh_script_progression --message="Validating installation parameters..." --weight=1
 
-final_path=/var/www/$app
-test ! -e "$final_path" || ynh_die --message="This path already contains a folder"
+#REMOVEME? install_dir=/var/www/$app
+#REMOVEME? test ! -e "$install_dir" || ynh_die --message="This path already contains a folder"
 
 # Register (book) web path
-ynh_webpath_register --app=$app --domain=$domain --path_url=$path_url
+#REMOVEME? ynh_webpath_register --app=$app --domain=$domain --path=$path
 
 #=================================================
 # STORE SETTINGS FROM MANIFEST
 #=================================================
-ynh_script_progression --message="Storing installation settings..."
+#REMOVEME? ynh_script_progression --message="Storing installation settings..."
 
-ynh_app_setting_set --app=$app --key=domain --value=$domain
-ynh_app_setting_set --app=$app --key=path --value=$path_url
+#REMOVEME? ynh_app_setting_set --app=$app --key=domain --value=$domain
+#REMOVEME? ynh_app_setting_set --app=$app --key=path --value=$path
 ynh_app_setting_set --app=$app --key=etherpad_instance --value=$etherpad_instance
 ynh_app_setting_set --app=$app --key=creation_open --value=$creation_open
 
@@ -57,30 +57,30 @@ ynh_app_setting_set --app=$app --key=creation_open --value=$creation_open
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
-ynh_script_progression --message="Configuring system user..." --weight=1
+#REMOVEME? ynh_script_progression --message="Configuring system user..." --weight=1
 
 # Create a system user
-ynh_system_user_create --username=$app --home_dir="$final_path"
+#REMOVEME? ynh_system_user_create --username=$app --home_dir="$install_dir"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 ynh_script_progression --message="Setting up source files..." --weight=4
 
-ynh_app_setting_set --app=$app --key=final_path --value=$final_path
+#REMOVEME? ynh_app_setting_set --app=$app --key=install_dir --value=$install_dir
 
-git config --system --add safe.directory $final_path
+git config --system --add safe.directory $install_dir
 # Note: We use git instead of ynh_setup_source, cause this repo use submodules
-git clone https://github.com/zamentur/libreto.git "$final_path" --quiet
+git clone https://github.com/zamentur/libreto.git "$install_dir" --quiet
 
-pushd "$final_path"
+pushd "$install_dir"
     git checkout $COMMIT --quiet
     git submodule update --init --recursive --quiet
 popd
 
-chmod 750 "$final_path"
-chmod -R o-rwx "$final_path"
-chown -R $app:www-data "$final_path"
+chmod 750 "$install_dir"
+chmod -R o-rwx "$install_dir"
+chown -R $app:www-data "$install_dir"
 
 #=================================================
 # PHP-FPM CONFIGURATION
@@ -89,7 +89,7 @@ ynh_script_progression --message="Configuring PHP-FPM..." --weight=2
 
 # Create a dedicated PHP-FPM config
 ynh_add_fpm_config
-phpversion=$(ynh_app_setting_get --app=$app --key=phpversion)
+#REMOVEME? phpversion=$(ynh_app_setting_get --app=$app --key=phpversion)
 
 #=================================================
 # NGINX CONFIGURATION
@@ -107,41 +107,41 @@ ynh_replace_string --match_string="__INSTANCE__" --replace_string="$etherpad_ins
 #=================================================
 ynh_script_progression --message="Adding a configuration file..."
 
-cp "../conf/config.dist.php" "$final_path/config.php"
+cp "../conf/config.dist.php" "$install_dir/config.php"
 
 provider="${domain%%.*}"
 if [ "$etherpad_instance" != "https://annuel2.framapad.org" ]; then
-    ynh_replace_string --match_string="// CUSTOM_PROVIDER" --replace_string="" --target_file="$final_path/config.php"
-    ynh_replace_string --match_string="__PROVIDER__" --replace_string="$provider" --target_file="$final_path/config.php"
-    ynh_replace_string --match_string="__INSTANCE__" --replace_string="$etherpad_instance" --target_file="$final_path/config.php"
+    ynh_replace_string --match_string="// CUSTOM_PROVIDER" --replace_string="" --target_file="$install_dir/config.php"
+    ynh_replace_string --match_string="__PROVIDER__" --replace_string="$provider" --target_file="$install_dir/config.php"
+    ynh_replace_string --match_string="__INSTANCE__" --replace_string="$etherpad_instance" --target_file="$install_dir/config.php"
 else
-    ynh_replace_string --match_string="__PROVIDER__" --replace_string="framapad" --target_file="$final_path/config.php"
+    ynh_replace_string --match_string="__PROVIDER__" --replace_string="framapad" --target_file="$install_dir/config.php"
 fi
 
 # Calculate and store the config file checksum into the app settings
-ynh_store_file_checksum "$final_path/config.php"
+ynh_store_file_checksum "$install_dir/config.php"
 
 #=================================================
 # GENERIC FINALIZATION
 #=================================================
 # SETUP SSOWAT
 #=================================================
-ynh_script_progression --message="Configuring permissions..." --weight=1
+#REMOVEME? ynh_script_progression --message="Configuring permissions..." --weight=1
 
 # Make app public if necessary
-if [ $is_public -eq 1 ]
+#REMOVEME? if [ $is_public -eq 1 ]
 then
 	# Everyone can access the app.
 	# The "main" permission is automatically created before the install script.
-	ynh_permission_update --permission="main" --add="visitors"
+#REMOVEME? 	ynh_permission_update --permission="main" --add="visitors"
 fi
 
 #=================================================
 # RELOAD NGINX
 #=================================================
-ynh_script_progression --message="Reloading NGINX web server..." --weight=1
+#REMOVEME? ynh_script_progression --message="Reloading NGINX web server..." --weight=1
 
-ynh_systemd_action --service_name=nginx --action=reload
+#REMOVEME? ynh_systemd_action --service_name=nginx --action=reload
 
 #=================================================
 # END OF SCRIPT

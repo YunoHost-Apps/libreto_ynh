@@ -4,7 +4,7 @@
 # COMMON VARIABLES
 #=================================================
 
-YNH_PHP_VERSION="7.3"
+#REMOVEME? YNH_PHP_VERSION="7.3"
 
 COMMIT="76408f5e98a68156afa47996e670d110a1c6106d"
 
