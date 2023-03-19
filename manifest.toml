@@ -67,3 +67,4 @@ ram.runtime = "50M"
 
     [resources.apt]
     packages = "php8.0fpm"
+    
