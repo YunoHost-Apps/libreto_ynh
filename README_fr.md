@@ -5,15 +5,16 @@ It shall NOT be edited by hand.
 
 # Libreto pour YunoHost
 
-[![Niveau d'intégration](https://dash.yunohost.org/integration/libreto.svg)](https://dash.yunohost.org/appci/app/libreto) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/libreto.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/libreto.maintain.svg)  
+[![Niveau d’intégration](https://dash.yunohost.org/integration/libreto.svg)](https://dash.yunohost.org/appci/app/libreto) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/libreto.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/libreto.maintain.svg)
+
 [![Installer Libreto avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=libreto)
 
 *[Read this readme in english.](./README.md)*
 
-> *Ce package vous permet d'installer Libreto rapidement et simplement sur un serveur YunoHost.
-Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l'installer et en profiter.*
+> *Ce package vous permet d’installer Libreto rapidement et simplement sur un serveur YunoHost.
+Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l’installer et en profiter.*
 
-## Vue d'ensemble
+## Vue d’ensemble
 
 Libreto est un carnet de note collaboratif fondé sur etherpad. Il peut devenir un mini-site, le carnet de bord d'un workshop ou le support de rédaction d'un livre collectif.
 
@@ -22,15 +23,15 @@ Libreto est un carnet de note collaboratif fondé sur etherpad. Il peut devenir 
 
 **Démo :** https://libreto.net
 
-## Captures d'écran
+## Captures d’écran
 
-![Capture d'écran de Libreto](./doc/screenshots/home.png)
-![Capture d'écran de Libreto](./doc/screenshots/menu.png)
+![Capture d’écran de Libreto](./doc/screenshots/home.png)
+![Capture d’écran de Libreto](./doc/screenshots/menu.png)
 
 ## Documentations et ressources
 
-* Site officiel de l'app : <https://libreto.net>
-* Dépôt de code officiel de l'app : <https://github.com/Ventricule/libreto>
+* Site officiel de l’app : <https://libreto.net>
+* Dépôt de code officiel de l’app : <https://github.com/Ventricule/libreto>
 * Documentation YunoHost pour cette app : <https://yunohost.org/app_libreto>
 * Signaler un bug : <https://github.com/YunoHost-Apps/libreto_ynh/issues>
 
@@ -46,4 +47,4 @@ ou
 sudo yunohost app upgrade libreto -u https://github.com/YunoHost-Apps/libreto_ynh/tree/testing --debug
 ```
 
-**Plus d'infos sur le packaging d'applications :** <https://yunohost.org/packaging_apps>
+**Plus d’infos sur le packaging d’applications :** <https://yunohost.org/packaging_apps>
