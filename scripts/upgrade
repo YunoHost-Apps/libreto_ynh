@@ -25,15 +25,14 @@ if [ "$upgrade_type" == "UPGRADE_APP" ]
 then
 	ynh_script_progression --message="Upgrading source files..." --weight=5
 
-	git config --system --add safe.directory $install_dir
+	chown -R $app:www-data "$install_dir"
 
 	# Download, check integrity, uncompress and patch the source from app.src
 	pushd "$install_dir"
-		git checkout master
-		git pull --quiet
-		git checkout $COMMIT --quiet
-		git config --global --add safe.directory $install_dir/libreto/vendor/Markdownify
-		git submodule update --init --recursive --quiet
+		ynh_exec_as $app git checkout master
+		ynh_exec_as $app git pull --quiet
+		ynh_exec_as $app git checkout $COMMIT --quiet
+		ynh_exec_as $app git submodule update --init --recursive --quiet
 	popd
 fi
 

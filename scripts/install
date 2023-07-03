@@ -26,9 +26,11 @@ git config --system --add safe.directory $install_dir
 # Note: We use git instead of ynh_setup_source, cause this repo use submodules
 git clone https://github.com/zamentur/libreto.git "$install_dir" --quiet
 
+chown -R $app:www-data "$install_dir"
+
 pushd "$install_dir"
-    git checkout $COMMIT --quiet
-    git submodule update --init --recursive --quiet
+    ynh_exec_as $app git checkout $COMMIT --quiet
+    ynh_exec_as $app git submodule update --init --recursive --quiet
 popd
 
 chmod -R o-rwx "$install_dir"
