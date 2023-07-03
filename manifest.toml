@@ -50,7 +50,7 @@ ram.runtime = "50M"
     default = "https://annuel2.framapad.org"
 
     [install.creation_open]
-    ask.en = "Is non member can create a Libreto wiki?"
+    ask.en = "Should people without a YunoHost account be able to create a Libreto wiki?"
     ask.fr = "Est-ce qu'une personne sans compte YunoHost peut créer un wiki Libreto ?"
     type = "boolean"
     default = true
