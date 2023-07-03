@@ -69,13 +69,14 @@ ynh_script_progression --message="Setting up source files..." --weight=4
 
 ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 
-git config --system --add safe.directory $final_path
 # Note: We use git instead of ynh_setup_source, cause this repo use submodules
 git clone https://github.com/zamentur/libreto.git "$final_path" --quiet
 
+chown -R $app:www-data "$final_path"
+
 pushd "$final_path"
-    git checkout $COMMIT --quiet
-    git submodule update --init --recursive --quiet
+    ynh_exec_as $app git checkout $COMMIT --quiet
+    ynh_exec_as $app git submodule update --init --recursive --quiet
 popd
 
 chmod 750 "$final_path"
