@@ -1,0 +1,15 @@
+test_format = 1.0
+
+[default]
+
+    # -------------------------------
+    # Default args to use for install
+    # -------------------------------
+
+    args.etherpad_instance = "https://annuel2.framapad.org"
+
+    # -------------------------------
+    # Commits to test upgrade from
+    # -------------------------------
+
+    test_upgrade_from.ce19369d.name = "Upgrade from 0.0.20180605~ynh3"

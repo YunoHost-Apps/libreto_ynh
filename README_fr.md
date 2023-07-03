@@ -25,7 +25,6 @@ Libreto est un carnet de note collaboratif fondé sur etherpad. Il peut devenir 
 
 ## Captures d’écran
 
-![Capture d’écran de Libreto](./doc/screenshots/home.png)
 ![Capture d’écran de Libreto](./doc/screenshots/menu.png)
 
 ## Documentations et ressources

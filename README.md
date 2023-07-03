@@ -25,7 +25,6 @@ Libreto is a collaborative etherpad-based notebook. It can become a mini-site, t
 
 ## Screenshots
 
-![Screenshot of Libreto](./doc/screenshots/home.png)
 ![Screenshot of Libreto](./doc/screenshots/menu.png)
 
 ## Documentation and resources
