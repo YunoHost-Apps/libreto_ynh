@@ -6,7 +6,7 @@
         "en": "Aggregate your pads to create a wiki",
         "fr": "Agrégez vos pads pour créer un wiki"
     },
-    "version": "0.0.20180605~ynh4",
+    "version": "0.0.20180605~ynh5",
     "url": "https://libreto.net",
     "upstream": {
         "license": "GPL-3.0-or-later",
