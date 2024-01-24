@@ -36,6 +36,7 @@ ynh_script_progression --message="Updating a configuration file..."
 
 ynh_backup_if_checksum_is_different --file="$install_dir/config.php"
 
+provider="__PROVIDER__"
 default_provider="framapad"
 commented_provider="// CUSTOM_PROVIDER"
 if [ "$etherpad_instance" != "https://annuel2.framapad.org" ]; then
