@@ -18,48 +18,17 @@ path="/"
 ynh_app_setting_set --app="$app" --key=path --value="$path"
 
 #=================================================
-# STORE SETTINGS FROM MANIFEST
-#=================================================
-
-ynh_app_setting_set --app=$app --key=etherpad_instance --value=$etherpad_instance
-ynh_app_setting_set --app=$app --key=creation_open --value=$creation_open
-
-#=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 ynh_script_progression --message="Setting up source files..." --weight=4
 
-git config --system --add safe.directory $install_dir
-
 # Note: We use git instead of ynh_setup_source, cause this repo use submodules
-git clone https://github.com/zamentur/libreto.git "$install_dir" --quiet
-
-chown -R $app:www-data "$install_dir"
-
-pushd "$install_dir"
-    ynh_exec_as $app git checkout $COMMIT --quiet
-    ynh_exec_as $app git submodule update --init --recursive --quiet
-popd
+ynh_exec_as "$app" git clone https://github.com/zamentur/libreto.git "$install_dir/libreto" --quiet
+ynh_exec_as "$app" git -C "$install_dir/libreto" checkout "$COMMIT" --quiet
+ynh_exec_as "$app" git -C "$install_dir/libreto" submodule update --init --recursive --quiet
 
 chmod -R o-rwx "$install_dir"
-chown -R $app:www-data "$install_dir"
-
-#=================================================
-# PHP-FPM CONFIGURATION
-#=================================================
-ynh_script_progression --message="Configuring PHP-FPM..." --weight=2
-
-# Create a dedicated PHP-FPM config
-ynh_add_fpm_config --usage=low --footprint=low
-
-#=================================================
-# NGINX CONFIGURATION
-#=================================================
-ynh_script_progression --message="Configuring NGINX web server..." --weight=2
-
-# Create a dedicated NGINX config
-ynh_add_nginx_config
-ynh_replace_string --match_string="__INSTANCE__" --replace_string="$etherpad_instance" --target_file="/etc/nginx/conf.d/$domain.d/$app.conf"
+chown -R "$app:www-data" "$install_dir"
 
 #=================================================
 # SPECIFIC SETUP
@@ -68,19 +37,27 @@ ynh_replace_string --match_string="__INSTANCE__" --replace_string="$etherpad_ins
 #=================================================
 ynh_script_progression --message="Adding a configuration file..."
 
-cp "../conf/config.dist.php" "$install_dir/config.php"
-
-provider="${domain%%.*}"
+default_provider="framapad"
+commented_provider="// CUSTOM_PROVIDER"
 if [ "$etherpad_instance" != "https://annuel2.framapad.org" ]; then
-    ynh_replace_string --match_string="// CUSTOM_PROVIDER" --replace_string="" --target_file="$install_dir/config.php"
-    ynh_replace_string --match_string="__PROVIDER__" --replace_string="$provider" --target_file="$install_dir/config.php"
-    ynh_replace_string --match_string="__INSTANCE__" --replace_string="$etherpad_instance" --target_file="$install_dir/config.php"
-else
-    ynh_replace_string --match_string="__PROVIDER__" --replace_string="framapad" --target_file="$install_dir/config.php"
+    provider="${domain%%.*}"
+    default_provider="$provider"
+    commented_provider=""
 fi
+ynh_add_config --template="config.dist.php" --destination="$install_dir/libreto/config.php"
 
-# Calculate and store the config file checksum into the app settings
-ynh_store_file_checksum "$install_dir/config.php"
+chown "$app:www-data" "$install_dir/libreto/config.php"
+
+#=================================================
+# SYSTEM CONFIGURATION
+#=================================================
+ynh_script_progression --message="Adding system configurations related to $app..." --weight=1
+
+# Create a dedicated PHP-FPM config
+ynh_add_fpm_config --usage=low --footprint=low
+
+# Create a dedicated NGINX config
+ynh_add_nginx_config
 
 #=================================================
 # END OF SCRIPT
