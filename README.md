@@ -31,7 +31,7 @@ Libreto is a collaborative etherpad-based notebook. It can become a mini-site, t
 
 * Official app website: <https://libreto.net>
 * Upstream app code repository: <https://github.com/Ventricule/libreto>
-* YunoHost documentation for this app: <https://yunohost.org/app_libreto>
+* YunoHost Store: <https://apps.yunohost.org/app/libreto>
 * Report a bug: <https://github.com/YunoHost-Apps/libreto_ynh/issues>
 
 ## Developer info
