@@ -7,7 +7,7 @@ name = "Libreto"
 description.en = "Aggregate your pads to create a wiki"
 description.fr = "Agrégez vos pads pour créer un wiki"
 
-version = "0.0.20180605~ynh4"
+version = "0.0.20180605~ynh5"
 
 maintainers = ["ljf"]
 
