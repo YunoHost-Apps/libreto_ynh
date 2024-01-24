@@ -10,6 +10,14 @@ source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
+# INITIALIZE AND STORE SETTINGS
+#=================================================
+
+# FIXME: subdir install does not seem to be supported anymore.
+path="/"
+ynh_app_setting_set --app="$app" --key=path --value="$path"
+
+#=================================================
 # STORE SETTINGS FROM MANIFEST
 #=================================================
 
