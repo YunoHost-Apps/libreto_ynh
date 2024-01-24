@@ -46,7 +46,7 @@ $providers = array(
 // CUSTOM_PROVIDER$providers += array(
 // CUSTOM_PROVIDER  '__PROVIDER__'  => array(
 // CUSTOM_PROVIDER    'name'                       => "__PROVIDER__",
-// CUSTOM_PROVIDER    'url'                        => "__INSTANCE__",
+// CUSTOM_PROVIDER    'url'                        => "__ETHERPAD_INSTANCE__",
 // CUSTOM_PROVIDER    'default_text'               => "Get involved with Etherpad at http://etherpad.org",
 // CUSTOM_PROVIDER    'markdown'                   => true,
 // CUSTOM_PROVIDER    'html'                       => true,
@@ -54,9 +54,9 @@ $providers = array(
 // CUSTOM_PROVIDER);
 
 $options = array(
-  'name'                            => "Libreto",  
+  'name'                            => "Libreto",
   'root'                            => '__PATH__',
   'use_subdomain'                   => false,
-  'default_provider'                => "__PROVIDER__",
+  'default_provider'                => "__DEFAULT_PROVIDER__",
   'providers'                       => $providers,
 );
