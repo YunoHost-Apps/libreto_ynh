@@ -12,6 +12,18 @@ source /usr/share/yunohost/helpers
 #=================================================
 # STANDARD UPGRADE STEPS
 #=================================================
+# ENSURE DOWNWARD COMPATIBILITY
+#=================================================
+ynh_script_progression --message="Ensuring downward compatibility..." --weight=1
+
+if [ ! -d "$install_dir/libreto/.git" ]; then
+    # Move git repository one step down"
+    mkdir "$install_dir/__new__"
+    find "$install_dir" -mindepth 1 -maxdepth 1 -not -name "__new__" -print0 | xargs -0 mv -t "$install_dir/__new__"
+    mv "$install_dir/__new__" "$install_dir/libreto"
+fi
+
+#=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 ynh_script_progression --message="Upgrading source files..." --weight=5
@@ -21,7 +33,7 @@ chown -R $app:www-data "$install_dir"
 # Download, check integrity, uncompress and patch the source from app.src
 ynh_exec_as "$app" git -C "$install_dir/libreto" checkout master
 ynh_exec_as "$app" git -C "$install_dir/libreto" pull --quiet
-ynh_exec_as "$app" git -C "$install_dir/libreto" checkout $COMMIT --quiet
+ynh_exec_as "$app" git -C "$install_dir/libreto" checkout "$COMMIT" --quiet
 ynh_exec_as "$app" git -C "$install_dir/libreto" submodule update --init --recursive --quiet
 
 chmod -R o-rwx "$install_dir"
