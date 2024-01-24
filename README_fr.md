@@ -31,7 +31,7 @@ Libreto est un carnet de note collaboratif fondé sur etherpad. Il peut devenir 
 
 * Site officiel de l’app : <https://libreto.net>
 * Dépôt de code officiel de l’app : <https://github.com/Ventricule/libreto>
-* Documentation YunoHost pour cette app : <https://yunohost.org/app_libreto>
+* YunoHost Store: <https://apps.yunohost.org/app/libreto>
 * Signaler un bug : <https://github.com/YunoHost-Apps/libreto_ynh/issues>
 
 ## Informations pour les développeurs
