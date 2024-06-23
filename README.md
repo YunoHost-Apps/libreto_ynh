@@ -9,7 +9,7 @@ It shall NOT be edited by hand.
 
 [![Install Libreto with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=libreto)
 
-*[Read this README is other languages.](./ALL_README.md)*
+*[Read this README in other languages.](./ALL_README.md)*
 
 > *This package allows you to install Libreto quickly and simply on a YunoHost server.*  
 > *If you don't have YunoHost, please consult [the guide](https://yunohost.org/install) to learn how to install it.*
@@ -26,6 +26,10 @@ Libreto is a collaborative etherpad-based notebook. It can become a mini-site, t
 ## Screenshots
 
 ![Screenshot of Libreto](./doc/screenshots/menu.png)
+
+## :red_circle: Antifeatures
+
+- **Upstream not maintained**: This software is not maintained anymore. Expect it to break down over time, be exposed to unfixed security breaches, etc.
 
 ## Documentation and resources
 

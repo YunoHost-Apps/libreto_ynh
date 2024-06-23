@@ -27,6 +27,10 @@ Libreto est un carnet de note collaboratif fondé sur etherpad. Il peut devenir 
 
 ![Capture d’écran de Libreto](./doc/screenshots/menu.png)
 
+## :red_circle: Anti-fonctionnalités
+
+- **Application non maintenue **: Ce logiciel n'est plus maintenu. Attendez-vous à ce qu'il ne fonctionne plus avec le temps, et que l'on découvre des failles de sécurité qui ne seront pas corrigées, etc.
+
 ## Documentations et ressources
 
 - Site officiel de l’app : <https://libreto.net>
