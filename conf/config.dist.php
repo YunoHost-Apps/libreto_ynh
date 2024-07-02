@@ -43,15 +43,15 @@ $providers = array(
     'html'                       => true,
   ),
 );
-// CUSTOM_PROVIDER$providers += array(
-// CUSTOM_PROVIDER  '__PROVIDER__'  => array(
-// CUSTOM_PROVIDER    'name'                       => "__PROVIDER__",
-// CUSTOM_PROVIDER    'url'                        => "__ETHERPAD_INSTANCE__",
-// CUSTOM_PROVIDER    'default_text'               => "Get involved with Etherpad at http://etherpad.org",
-// CUSTOM_PROVIDER    'markdown'                   => true,
-// CUSTOM_PROVIDER    'html'                       => true,
-// CUSTOM_PROVIDER  ),
-// CUSTOM_PROVIDER);
+__COMMENTED_PROVIDER__$providers += array(
+__COMMENTED_PROVIDER__  '__PROVIDER__'  => array(
+__COMMENTED_PROVIDER__    'name'                       => "__PROVIDER__",
+__COMMENTED_PROVIDER__    'url'                        => "__ETHERPAD_INSTANCE__",
+__COMMENTED_PROVIDER__    'default_text'               => "Get involved with Etherpad at http://etherpad.org",
+__COMMENTED_PROVIDER__    'markdown'                   => true,
+__COMMENTED_PROVIDER__    'html'                       => true,
+__COMMENTED_PROVIDER__  ),
+__COMMENTED_PROVIDER__);
 
 $options = array(
   'name'                            => "Libreto",
