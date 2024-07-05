@@ -5,7 +5,7 @@
 
 # YunoHost 上的 Libreto
 
-[![集成程度](https://dash.yunohost.org/integration/libreto.svg)](https://dash.yunohost.org/appci/app/libreto) ![工作状态](https://ci-apps.yunohost.org/ci/badges/libreto.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/libreto.maintain.svg)
+[![集成程度](https://dash.yunohost.org/integration/libreto.svg)](https://ci-apps.yunohost.org/ci/apps/libreto/) ![工作状态](https://ci-apps.yunohost.org/ci/badges/libreto.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/libreto.maintain.svg)
 
 [![使用 YunoHost 安装 Libreto](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=libreto)
 

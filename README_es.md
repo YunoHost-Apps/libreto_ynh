@@ -5,7 +5,7 @@ No se debe editar a mano.
 
 # Libreto para Yunohost
 
-[![Nivel de integración](https://dash.yunohost.org/integration/libreto.svg)](https://dash.yunohost.org/appci/app/libreto) ![Estado funcional](https://ci-apps.yunohost.org/ci/badges/libreto.status.svg) ![Estado En Mantención](https://ci-apps.yunohost.org/ci/badges/libreto.maintain.svg)
+[![Nivel de integración](https://dash.yunohost.org/integration/libreto.svg)](https://ci-apps.yunohost.org/ci/apps/libreto/) ![Estado funcional](https://ci-apps.yunohost.org/ci/badges/libreto.status.svg) ![Estado En Mantención](https://ci-apps.yunohost.org/ci/badges/libreto.maintain.svg)
 
 [![Instalar Libreto con Yunhost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=libreto)
 
