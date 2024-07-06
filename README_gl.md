@@ -19,7 +19,7 @@ NON debe editarse manualmente.
 Libreto is a collaborative etherpad-based notebook. It can become a mini-site, the synopsis of a workshop or the support for writing a collective book.
 
 
-**Versión proporcionada:** 2019.08.07~ynh1
+**Versión proporcionada:** 2024.07.05~ynh1
 
 **Demo:** <https://libreto.net>
 
