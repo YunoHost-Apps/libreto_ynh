@@ -7,7 +7,7 @@ name = "Libreto"
 description.en = "Aggregate your pads to create a wiki"
 description.fr = "Agrégez vos pads pour créer un wiki"
 
-version = "2019.08.07~ynh1"
+version = "2024.07.05~ynh1"
 
 maintainers = ["ljf"]
 
@@ -56,8 +56,8 @@ ram.runtime = "50M"
 [resources]
     [resources.sources.main]
     # This is not used as we are using git clone + submodules. It's only here for autoupdate.
-    url = "https://github.com/Ventricule/libreto/archive/da3f312fec0a829cc3df1191113e93b49fb4786e.tar.gz"
-    sha256 = "de713b5656e7ae32bd52d69c64cd7d87ac3307533aa451f828c36fb957b0e8ad"
+    url = "https://github.com/Ventricule/libreto/archive/eb05d3785f8977ae2745ad8de0240fc07128e574.tar.gz"
+    sha256 = "79b55fc1d9d29f56d95fe35e8b83b8654833e425dc0d9a23669c8bf6400a15eb"
     prefetch = false
     autoupdate.strategy = "latest_github_commit"
 
