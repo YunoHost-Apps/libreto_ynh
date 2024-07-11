@@ -5,7 +5,7 @@ EZ editatu eskuz.
 
 # Libreto YunoHost-erako
 
-[![Integrazio maila](https://dash.yunohost.org/integration/libreto.svg)](https://dash.yunohost.org/appci/app/libreto) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/libreto.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/libreto.maintain.svg)
+[![Integrazio maila](https://dash.yunohost.org/integration/libreto.svg)](https://ci-apps.yunohost.org/ci/apps/libreto/) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/libreto.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/libreto.maintain.svg)
 
 [![Instalatu Libreto YunoHost-ekin](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=libreto)
 
@@ -19,7 +19,7 @@ EZ editatu eskuz.
 Libreto is a collaborative etherpad-based notebook. It can become a mini-site, the synopsis of a workshop or the support for writing a collective book.
 
 
-**Paketatutako bertsioa:** 2019.08.07~ynh1
+**Paketatutako bertsioa:** 2024.07.05~ynh1
 
 **Demoa:** <https://libreto.net>
 
