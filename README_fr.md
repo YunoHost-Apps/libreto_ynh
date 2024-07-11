@@ -19,7 +19,7 @@ Il NE doit PAS être modifié à la main.
 Libreto est un carnet de note collaboratif fondé sur etherpad. Il peut devenir un mini-site, le carnet de bord d'un workshop ou le support de rédaction d'un livre collectif.
 
 
-**Version incluse :** 2019.08.07~ynh1
+**Version incluse :** 2024.07.05~ynh1
 
 **Démo :** <https://libreto.net>
 
