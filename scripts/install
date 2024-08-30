@@ -1,11 +1,5 @@
 #!/bin/bash
 
-#=================================================
-# GENERIC START
-#=================================================
-# IMPORT GENERIC HELPERS
-#=================================================
-
 source _common.sh
 source /usr/share/yunohost/helpers
 
@@ -15,27 +9,26 @@ source /usr/share/yunohost/helpers
 
 # FIXME: subdir install does not seem to be supported anymore.
 path="/"
-ynh_app_setting_set --app="$app" --key=path --value="$path"
+ynh_app_setting_set --key=path --value="$path"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
-ynh_script_progression --message="Setting up source files..." --weight=4
+ynh_script_progression "Setting up source files..."
 
 # Note: We use git instead of ynh_setup_source, cause this repo use submodules
-ynh_exec_as "$app" git clone https://github.com/zamentur/libreto.git "$install_dir/libreto" --quiet
-ynh_exec_as "$app" git -C "$install_dir/libreto" checkout "$COMMIT" --quiet
-ynh_exec_as "$app" git -C "$install_dir/libreto" submodule update --init --recursive --quiet
+ynh_exec_as_app git clone https://github.com/zamentur/libreto.git "$install_dir/libreto" --quiet
+ynh_exec_as_app git -C "$install_dir/libreto" checkout "$COMMIT" --quiet
+ynh_exec_as_app git -C "$install_dir/libreto" submodule update --init --recursive --quiet
 
-chmod -R o-rwx "$install_dir"
-chown -R "$app:www-data" "$install_dir"
-
+#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod -R o-rwx "$install_dir"
+#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown -R "$app:www-data" "$install_dir"
 #=================================================
 # SPECIFIC SETUP
 #=================================================
 # ADD A CONFIGURATION
 #=================================================
-ynh_script_progression --message="Adding a configuration file..."
+ynh_script_progression "Adding $app's configuration..."
 
 provider="__PROVIDER__"
 default_provider="framapad"
@@ -45,23 +38,23 @@ if [ "$etherpad_instance" != "https://annuel2.framapad.org" ]; then
     default_provider="$provider"
     commented_provider=""
 fi
-ynh_add_config --template="config.dist.php" --destination="$install_dir/libreto/config.php"
+ynh_config_add --template="config.dist.php" --destination="$install_dir/libreto/config.php"
 
-chown "$app:www-data" "$install_dir/libreto/config.php"
+#REMOVEME? Assuming the file is setup using ynh_config_add, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown "$app:www-data" "$install_dir/libreto/config.php"
 
 #=================================================
 # SYSTEM CONFIGURATION
 #=================================================
-ynh_script_progression --message="Adding system configurations related to $app..." --weight=1
+ynh_script_progression "Adding system configurations related to $app..."
 
 # Create a dedicated PHP-FPM config
-ynh_add_fpm_config --usage=low --footprint=low
+ynh_config_add_phpfpm
 
 # Create a dedicated NGINX config
-ynh_add_nginx_config
+ynh_config_add_nginx
 
 #=================================================
 # END OF SCRIPT
 #=================================================
 
-ynh_script_progression --message="Installation of $app completed" --last
+ynh_script_progression "Installation of $app completed"
