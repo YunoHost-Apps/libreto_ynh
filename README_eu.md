@@ -5,7 +5,9 @@ EZ editatu eskuz.
 
 # Libreto YunoHost-erako
 
-[![Integrazio maila](https://dash.yunohost.org/integration/libreto.svg)](https://ci-apps.yunohost.org/ci/apps/libreto/) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/libreto.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/libreto.maintain.svg)
+[![Integrazio maila](https://apps.yunohost.org/badge/integration/libreto)](https://ci-apps.yunohost.org/ci/apps/libreto/)
+![Funtzionamendu egoera](https://apps.yunohost.org/badge/state/libreto)
+![Mantentze egoera](https://apps.yunohost.org/badge/maintained/libreto)
 
 [![Instalatu Libreto YunoHost-ekin](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=libreto)
 

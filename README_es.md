@@ -5,7 +5,9 @@ No se debe editar a mano.
 
 # Libreto para Yunohost
 
-[![Nivel de integración](https://dash.yunohost.org/integration/libreto.svg)](https://ci-apps.yunohost.org/ci/apps/libreto/) ![Estado funcional](https://ci-apps.yunohost.org/ci/badges/libreto.status.svg) ![Estado En Mantención](https://ci-apps.yunohost.org/ci/badges/libreto.maintain.svg)
+[![Nivel de integración](https://apps.yunohost.org/badge/integration/libreto)](https://ci-apps.yunohost.org/ci/apps/libreto/)
+![Estado funcional](https://apps.yunohost.org/badge/state/libreto)
+![Estado En Mantención](https://apps.yunohost.org/badge/maintained/libreto)
 
 [![Instalar Libreto con Yunhost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=libreto)
 
@@ -40,7 +42,7 @@ Libreto is a collaborative etherpad-based notebook. It can become a mini-site, t
 
 ## Información para desarrolladores
 
-Por favor enviar sus correcciones a la [`branch testing`](https://github.com/YunoHost-Apps/libreto_ynh/tree/testing
+Por favor enviar sus correcciones a la [rama `testing`](https://github.com/YunoHost-Apps/libreto_ynh/tree/testing).
 
 Para probar la rama `testing`, sigue asÍ:
 
