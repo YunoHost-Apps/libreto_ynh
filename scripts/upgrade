@@ -1,20 +1,12 @@
 #!/bin/bash
 
-#=================================================
-# GENERIC START
-#=================================================
-# IMPORT GENERIC HELPERS
-#=================================================
-
 source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
-# STANDARD UPGRADE STEPS
-#=================================================
 # ENSURE DOWNWARD COMPATIBILITY
 #=================================================
-ynh_script_progression --message="Ensuring downward compatibility..." --weight=1
+ynh_script_progression "Ensuring downward compatibility..."
 
 if [ ! -d "$install_dir/libreto/.git" ]; then
     # Move git repository one step down"
@@ -26,27 +18,20 @@ fi
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
-ynh_script_progression --message="Upgrading source files..." --weight=5
-
-chown -R $app:www-data "$install_dir"
+ynh_script_progression "Upgrading source files..."
 
 # Download, check integrity, uncompress and patch the source from app.src
-ynh_exec_as "$app" git -C "$install_dir/libreto" checkout master
-ynh_exec_as "$app" git -C "$install_dir/libreto" pull --quiet
-ynh_exec_as "$app" git -C "$install_dir/libreto" checkout "$COMMIT" --quiet
-ynh_exec_as "$app" git -C "$install_dir/libreto" submodule update --init --recursive --quiet
+ynh_exec_as_app git -C "$install_dir/libreto" checkout master
+ynh_exec_as_app git -C "$install_dir/libreto" pull --quiet
+ynh_exec_as_app git -C "$install_dir/libreto" checkout "$COMMIT" --quiet
+ynh_exec_as_app git -C "$install_dir/libreto" submodule update --init --recursive --quiet
 
-chmod -R o-rwx "$install_dir"
-chown -R "$app:www-data" "$install_dir"
-
-#=================================================
-# SPECIFIC UPGRADE
 #=================================================
 # UPDATE A CONFIG FILE
 #=================================================
-ynh_script_progression --message="Updating a configuration file..."
+ynh_script_progression "Updating configuration..."
 
-ynh_backup_if_checksum_is_different --file="$install_dir/config.php"
+ynh_backup_if_checksum_is_different "$install_dir/config.php"
 
 provider="__PROVIDER__"
 default_provider="framapad"
@@ -56,23 +41,20 @@ if [ "$etherpad_instance" != "https://annuel2.framapad.org" ]; then
     default_provider="$provider"
     commented_provider=""
 fi
-ynh_add_config --template="config.dist.php" --destination="$install_dir/libreto/config.php"
 
-chown "$app:www-data" "$install_dir/libreto/config.php"
+ynh_config_add --template="config.dist.php" --destination="$install_dir/libreto/config.php"
 
 #=================================================
 # REAPPLY SYSTEM CONFIGURATIONS
 #=================================================
-ynh_script_progression --message="Upgrading system configurations related to $app..." --weight=1
+ynh_script_progression "Upgrading system configurations related to $app..."
 
-# Create a dedicated PHP-FPM config
-ynh_add_fpm_config --usage=low --footprint=low
+ynh_config_add_phpfpm
 
-# Create a dedicated NGINX config
-ynh_add_nginx_config
+ynh_config_add_nginx
 
 #=================================================
 # END OF SCRIPT
 #=================================================
 
-ynh_script_progression --message="Upgrade of $app completed" --last
+ynh_script_progression "Upgrade of $app completed"
