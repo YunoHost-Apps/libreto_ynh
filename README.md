@@ -5,7 +5,9 @@ It shall NOT be edited by hand.
 
 # Libreto for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/libreto.svg)](https://ci-apps.yunohost.org/ci/apps/libreto/) ![Working status](https://ci-apps.yunohost.org/ci/badges/libreto.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/libreto.maintain.svg)
+[![Integration level](https://apps.yunohost.org/badge/integration/libreto)](https://ci-apps.yunohost.org/ci/apps/libreto/)
+![Working status](https://apps.yunohost.org/badge/state/libreto)
+![Maintenance status](https://apps.yunohost.org/badge/maintained/libreto)
 
 [![Install Libreto with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=libreto)
 
